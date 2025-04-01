@@ -1,80 +1,88 @@
+using FireSharp.Config;
+using FireSharp.Interfaces;
+using FireSharp.Response;
 using Firebase.Auth;
-using Firebase.Database;
-using Firebase.Database.Query;
-using Google.Cloud.Firestore;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
-namespace New_Messenger_App
+namespace CHATIFY
 {
     public partial class FormRegister : Form
     {
-        private FirestoreDb firestoreDb;
+        FireSharp.Config.FirebaseConfig databaseConfig = new FireSharp.Config.FirebaseConfig
+        {
+            AuthSecret = "YOUR_API_KEY",
+            BasePath = "YOUR_BASE_PATH"
+        };
+
+        Firebase.Auth.FirebaseConfig authConfig = new Firebase.Auth.FirebaseConfig("YOUR_API_KEY");
+
+        IFirebaseClient client;
+        FirebaseAuthProvider authProvider;
 
         public FormRegister()
         {
             InitializeComponent();
-            InitializeFirebase();
-        }
-        private void InitializeFirebase()
-        {
-            string path = @"D:\Zoom";
-            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
-
-            firestoreDb = FirestoreDb.Create("chatapp-24374");
+            client = new FireSharp.FirebaseClient(databaseConfig);
+            authProvider = new FirebaseAuthProvider(authConfig);
         }
 
         private async void buttonRegister_Click(object sender, EventArgs e)
         {
-            string username = textBoxUsername.Text;
-            string email = textBoxEmail.Text;
-            string password = textBoxPassword.Text;
-
-            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+            if (string.IsNullOrWhiteSpace(textBoxUsername.Text) ||
+                string.IsNullOrWhiteSpace(textBoxEmail.Text) ||
+                string.IsNullOrWhiteSpace(textBoxPassword.Text))
             {
-                MessageBox.Show("Please fill all fields.");
+                MessageBox.Show("Please fill all fields!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             try
             {
-                // Store user details in Firestore
-                DocumentReference docRef = firestoreDb.Collection("Users").Document(email);
-                await docRef.SetAsync(new User { Username = username, Email = email, Password = password });
+                var authResult = await authProvider.CreateUserWithEmailAndPasswordAsync(
+                    textBoxEmail.Text, textBoxPassword.Text);
 
-                MessageBox.Show("Registration Successful! You can now log in.");
+                string uid = authResult.User.LocalId;  
 
-                // Open Login Form
-                this.Hide();
-                FormLogin loginForm = new FormLogin();
-                loginForm.Show();
+                if (client != null)
+                {
+                    var user = new User
+                    {
+                        Username = textBoxUsername.Text,
+                        Email = textBoxEmail.Text,
+                        UID = uid  
+                    };
+
+                    FirebaseResponse response = await client.SetAsync("Users/" + uid, user);
+
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        MessageBox.Show("User Registered Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to save user details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
-            catch (Exception ex)
+            catch (FirebaseAuthException ex)
             {
-                MessageBox.Show($"Registration Failed: {ex.Message}");
+                MessageBox.Show("Error: " + ex.Message, "Registration Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        public class User
+        private void buttonLogin_Click(object sender, EventArgs e)
         {
-            public string Username { get; set; }
-            public string Email { get; set; }
-            public string Password { get; set; } // Store password securely in real apps
+            FormLogin formLogin = new FormLogin();
+            formLogin.ShowDialog();
+            this.Hide();
         }
-
-        private void buttonBack_Click(object sender, EventArgs e)
-        {
-            FormLogin loginForm = new FormLogin();
-            loginForm.Show();
-            this.Close(); // Close the registration form
-        }
+    }
+    public class User
+    {
+        public string Username { get; set; }
+        public string Email { get; set; }
+        public string UID { get; set; } 
     }
 }
