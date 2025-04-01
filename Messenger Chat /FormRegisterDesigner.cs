@@ -1,4 +1,4 @@
-namespace New_Messenger_App
+namespace CHATIFY
 {
     partial class FormRegister
     {
@@ -30,6 +30,7 @@ namespace New_Messenger_App
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRegister));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonLogin = new System.Windows.Forms.Button();
             this.buttonBack = new System.Windows.Forms.Button();
             this.pictureBoxShow = new System.Windows.Forms.PictureBox();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
@@ -51,6 +52,7 @@ namespace New_Messenger_App
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.panel1.Controls.Add(this.buttonLogin);
             this.panel1.Controls.Add(this.buttonBack);
             this.panel1.Controls.Add(this.pictureBoxShow);
             this.panel1.Controls.Add(this.textBoxPassword);
@@ -63,19 +65,36 @@ namespace New_Messenger_App
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.textBoxEmail);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(760, 296);
+            this.panel1.Location = new System.Drawing.Point(689, 295);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(524, 442);
             this.panel1.TabIndex = 2;
             // 
+            // buttonLogin
+            // 
+            this.buttonLogin.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.buttonLogin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonLogin.FlatAppearance.BorderSize = 0;
+            this.buttonLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonLogin.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonLogin.ForeColor = System.Drawing.Color.White;
+            this.buttonLogin.Location = new System.Drawing.Point(274, 315);
+            this.buttonLogin.Name = "buttonLogin";
+            this.buttonLogin.Size = new System.Drawing.Size(120, 38);
+            this.buttonLogin.TabIndex = 20;
+            this.buttonLogin.Text = "Login";
+            this.buttonLogin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonLogin.UseVisualStyleBackColor = false;
+            this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
+            // 
             // buttonBack
             // 
+            this.buttonBack.Image = global::CHATIFY.Properties.Resources._return;
             this.buttonBack.Location = new System.Drawing.Point(15, 13);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(49, 38);
             this.buttonBack.TabIndex = 19;
             this.buttonBack.UseVisualStyleBackColor = true;
-            this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
             // 
             // pictureBoxShow
             // 
@@ -141,7 +160,7 @@ namespace New_Messenger_App
             this.buttonRegister.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonRegister.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonRegister.ForeColor = System.Drawing.Color.White;
-            this.buttonRegister.Location = new System.Drawing.Point(206, 312);
+            this.buttonRegister.Location = new System.Drawing.Point(131, 315);
             this.buttonRegister.Name = "buttonRegister";
             this.buttonRegister.Size = new System.Drawing.Size(119, 38);
             this.buttonRegister.TabIndex = 15;
@@ -216,7 +235,7 @@ namespace New_Messenger_App
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FormRegister";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormRegister";
+            this.Text = "CHATIFY";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -242,5 +261,7 @@ namespace New_Messenger_App
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxEmail;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button buttonLogin;
     }
 }
+
