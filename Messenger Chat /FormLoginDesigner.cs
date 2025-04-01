@@ -1,4 +1,4 @@
-namespace New_Messenger_App
+namespace CHATIFY
 {
     partial class FormLogin
     {
@@ -28,6 +28,7 @@ namespace New_Messenger_App
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogin));
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBoxShow = new System.Windows.Forms.PictureBox();
@@ -40,6 +41,7 @@ namespace New_Messenger_App
             this.buttonLogin = new System.Windows.Forms.Button();
             this.textBoxEmail = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxShow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHide)).BeginInit();
@@ -59,7 +61,7 @@ namespace New_Messenger_App
             this.panel1.Controls.Add(this.buttonLogin);
             this.panel1.Controls.Add(this.textBoxEmail);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(760, 296);
+            this.panel1.Location = new System.Drawing.Point(689, 295);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(524, 442);
             this.panel1.TabIndex = 1;
@@ -69,7 +71,7 @@ namespace New_Messenger_App
             this.pictureBoxShow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBoxShow.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBoxShow.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxShow.Image")));
-            this.pictureBoxShow.Location = new System.Drawing.Point(370, 238);
+            this.pictureBoxShow.Location = new System.Drawing.Point(370, 236);
             this.pictureBoxShow.Name = "pictureBoxShow";
             this.pictureBoxShow.Size = new System.Drawing.Size(24, 24);
             this.pictureBoxShow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -198,7 +200,7 @@ namespace New_Messenger_App
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FormLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "FormLogin";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -222,6 +224,6 @@ namespace New_Messenger_App
         private System.Windows.Forms.Button buttonLogin;
         private System.Windows.Forms.TextBox textBoxEmail;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }
-
